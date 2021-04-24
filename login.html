@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>登陆</title>
+<link rel="stylesheet" href="css/style.css">
+
+<body>
+
+    <div class="login-container">
+        <h1>请登陆</h1>
+
+        <div class="connect">
+            <p>Mapbox开发</p>
+        </div>
+        <form action="" method="post" id="loginForm">
+            <div>
+                <input type="text" name="username" class="username" placeholder="用户名" autocomplete="off" />
+            </div>
+            <div>
+                <input type="password" name="password" class="password" placeholder="密码" oncontextmenu="return false" onpaste="return false" />
+            </div>
+
+            <button type="button" class="travel" onclick="get()"> 登  录</button>
+
+        </form>
+
+        <a href="register.html">
+            <button type="button" class="register-tis">注 册 账 号？</button>
+
+        </a>
+
+        <a href="forTraveler.html">
+            <button type="button" class="travel">游 客 浏 览</button>
+        </a>
+    </div>
+
+</body>
+
+
+
+
+<script src="js/jquery-1.11.2.min.js"></script>
+<!--1。打开字滑入效果(animate) 2。表单验证属性设置-->
+<script src="js/common.js"></script>
+<!--背景图片自动更换-->
+<!--原库插件-->
+<script src="js/supersized.3.2.7.min.js"></script>
+<!--设置自动切换的属性-->
+<script src="js/supersized-init.js"></script>
+<!--表单验证-->
+<script src="js/jquery.validate.min.js?var1.14.0"></script>
+
+
+
+<script>
+    function get(){
+        window.location.href='MapShow.html';
+    }
+</script>
+
+</html>

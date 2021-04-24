@@ -1,0 +1,42 @@
+<!DOCTYPE HTML
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Mapbox地图显示</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='map'></div>
+    <script>
+        var MapAccessToken;
+        var MapStyle;
+
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZGVuZ3lhb3ppIiwiYSI6ImNrbXZ3NHFxMTA5ODIybnA2eGNjY3ZuMXAifQ.nsbYYGBUMroFneBfgZ5yxQ';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/dengyaozi/cknkckbqn1zc817o50bv2u5fm',
+            center: [108, 33],
+            zoom: 4,
+            touchZoomRotatez: true
+        });
+    </script>
+</body>
+
+</html>

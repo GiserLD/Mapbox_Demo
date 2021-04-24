@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Measure distances</title>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #map {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <style>
+    .distance-container {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1;
+    }
+
+    .distance-container>* {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 11px;
+      line-height: 18px;
+      display: block;
+      margin: 0;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+
+    .mapboxgl-popup-tip {
+      border: none;
+    }
+
+    .mapboxgl-popup-content {
+      padding: 0;
+    }
+
+    .tooltip {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 11px;
+      line-height: 18px;
+      display: block;
+      margin: 0;
+      padding: 5px 10px;
+      border-radius: 3px;
+    }
+
+    .result {
+      background-color: #ffcc33;
+      color: black;
+      border: 1px solid white;
+    }
+  </style>
+
+  <div id="map"></div>
+  <div id="distance" class="distance-container"></div>
+
+  <script src="https://npmcdn.com/@turf/turf@5.1.6/turf.min.js"></script>
+  <script>
+    mapboxgl.accessToken =
+      'pk.eyJ1IjoiY2hyaXNtYTI4NTciLCJhIjoiY2s5czhjNGxtMDM4ejNmbGkzNjgzM20wNiJ9.XFgSSvElyw0BY7bvky5NwA';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [2.3399, 48.8555],
+      zoom: 12
+    });
+
+    // GeoJSON object to hold our measurement features
+    // 存储正在绘制的线要素
+    var geojson = {
+      'type': 'FeatureCollection',
+      'features': []
+    };
+
+    // 存储已经绘制完成的线要素
+    var oldgeojson = {
+      'type': 'FeatureCollection',
+      'features': []
+    };
+
+    var helpTooltip = new mapboxgl.Popup({
+      closeButton: false,
+      anchor: 'top-left',
+      offset: 10
+    });
+
+    var measureTooltip = new mapboxgl.Popup({
+      closeButton: false,
+      anchor: 'bottom',
+      offset: 10
+    });
+
+    map.on('load', function () {
+      // 绘制中的图层
+      map.addSource('geojson', {
+        'type': 'geojson',
+        'data': geojson
+      });
+
+      // Add styles to the map
+      map.addLayer({
+        id: 'measure-points',
+        type: 'circle',
+        source: 'geojson',
+        paint: {
+          'circle-radius': 5,
+          'circle-color': '#000'
+        },
+        filter: ['in', '$type', 'Point']
+      });
+      map.addLayer({
+        id: 'measure-lines',
+        type: 'line',
+        source: 'geojson',
+        layout: {
+          'line-cap': 'round',
+          'line-join': 'round'
+        },
+        paint: {
+          'line-color': '#000',
+          'line-width': 2.5
+        },
+        filter: ['in', '$type', 'LineString']
+      });
+
+      // 绘制完成的图层
+      map.addSource('old-geojson', {
+        'type': 'geojson',
+        'data': oldgeojson
+      });
+
+      // Add styles to the map
+      map.addLayer({
+        id: 'old-measure-points',
+        type: 'circle',
+        source: 'old-geojson',
+        paint: {
+          'circle-radius': 5,
+          'circle-color': '#ffcc33'
+        },
+        filter: ['in', '$type', 'Point']
+      });
+      map.addLayer({
+        id: 'old-measure-lines',
+        type: 'line',
+        source: 'old-geojson',
+        layout: {
+          'line-cap': 'round',
+          'line-join': 'round'
+        },
+        paint: {
+          'line-color': '#ffcc33',
+          'line-width': 2.5
+        },
+        filter: ['in', '$type', 'LineString']
+      });
+    });
+
+    map.on('click', function (e) {
+      if (geojson.features.length > 1) geojson.features.pop();
+      var point = getPointFeature(e.lngLat.lng, e.lngLat.lat);
+      geojson.features.push(point);
+      if (geojson.features.length == 1) {
+        map.on('mousemove', onMouseMove);
+      }
+      if (geojson.features.length > 1) {
+        var linestring = getLineFeature(geojson.features)
+        geojson.features.push(linestring);
+      }
+      map.getSource('geojson').setData(geojson);
+    });
+
+    map.on('dblclick', function (e) {
+      map.doubleClickZoom.disable();
+      map.off('mousemove', onMouseMove);
+
+      var linestring = geojson.features[geojson.features.length - 1];
+      var value = turf.length(linestring).toLocaleString() + 'km';
+      var lastPointCoord = geojson.features[geojson.features.length - 2].geometry.coordinates;
+      var resultTooltip = new mapboxgl.Popup({
+          closeButton: false,
+          // 一定要设为false，否则默认点击地图关闭Popup
+          closeOnClick: false,
+          anchor: 'bottom',
+          offset: 10
+        })
+        .setLngLat(lastPointCoord)
+        .setHTML(`<div class = 'tooltip result'>${value}</div>`)
+        .addTo(map);
+
+      oldgeojson.features.push(...geojson.features);
+      map.getSource('old-geojson').setData(oldgeojson);
+
+      // 清空当前绘制的要素
+      geojson.features = [];
+      map.getSource('geojson').setData(geojson);
+    });
+
+    map.on('mousemove', onMouseMove);
+
+    function onMouseMove(e) {
+      if (geojson.features.length == 0) {
+        helpTooltip.setLngLat(e.lngLat)
+          .setHTML(`<div class = 'tooltip'>Click to start drawing</div>`)
+          .addTo(map);
+      }
+      if (geojson.features.length > 1) {
+        geojson.features.pop();
+        geojson.features.pop();
+      }
+      if (geojson.features.length > 0) {
+        helpTooltip.setLngLat(e.lngLat)
+          .setHTML(`<div class = 'tooltip'>Click to continue drawing</div>`)
+          .addTo(map);
+        var point = getPointFeature(e.lngLat.lng, e.lngLat.lat);
+        geojson.features.push(point);
+        if (geojson.features.length > 1) {
+          var linestring = getLineFeature(geojson.features)
+          geojson.features.push(linestring);
+          var value = turf.length(linestring).toLocaleString() + 'km';
+          measureTooltip.setLngLat(e.lngLat)
+            .setHTML(`<div class = 'tooltip'>${value}</div>`)
+            .addTo(map);
+        }
+        map.getSource('geojson').setData(geojson);
+      }
+    }
+
+    function getPointFeature(lng, lat) {
+      var point = {
+        'type': 'Feature',
+        'geometry': {
+          'type': 'Point',
+          'coordinates': [lng, lat]
+        },
+        'properties': {
+          'id': String(new Date().getTime())
+        }
+      };
+
+      return point;
+    }
+
+    function getLineFeature(features) {
+      var linestring = {
+        'type': 'Feature',
+        'geometry': {
+          'type': 'LineString',
+          'coordinates': []
+        }
+      };
+      linestring.geometry.coordinates = features.map(
+        function (point) {
+          return point.geometry.coordinates;
+        }
+      );
+      return linestring;
+    }
+  </script>
+
+</body>
+
+</html>

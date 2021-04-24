@@ -1,0 +1,154 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>Mapbox开发</title>
+	<link href="css/MapShow.css" rel="stylesheet" type="text/css" />
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet' />
+	<!-- 导航定位 -->
+	<script
+		src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+	<link rel="stylesheet"
+		href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
+		type="text/css">
+	<!-- 地理编码器 -->
+	<script
+		src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+	<link rel="stylesheet"
+		href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css"
+		type="text/css">
+	<!-- 绘图 -->
+	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.js'></script>
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.9/mapbox-gl-draw.css'
+		type='text/css' />
+	<!--语言 -->
+	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-language/v0.10.0/mapbox-gl-language.js'></script>
+	<!-- Turf -->
+	<script src='https://unpkg.com/@turf/turf@6.3.0/turf.min.js'></script>
+	<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+	<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+	<!-- 三维模型 -->
+	<script src="https://unpkg.com/three@0.126.0/build/three.min.js"></script>
+	<script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.8.0/suncalc.min.js"></script>
+
+</head>
+<template>
+	<div id="map">
+
+	</div>
+</template>
+
+<script>
+	import mapboxgl from 'mapbox-gl';
+
+	export default {
+		name: 'HelloWorld',
+		data() {
+			return {
+				map: null,
+			}
+		},
+		mounted() {
+			mapboxgl.accessToken =
+				'pk.eyJ1IjoiaGFtYnVnZXJkZXZlbG9wIiwiYSI6ImNqNXJtZjF4ZzB3em4yd21pZmVqbHlleDAifQ.I9eqVjtotz7jaU7XcJm9pQ';
+			let map = new mapboxgl.Map({
+				container: "map",
+				style: "mapbox://styles/mapbox/light-v10",
+				zoom: 0.3,
+				center: [0, 20]
+			});
+			this.map = map;
+			//解决canvas渲染不正确
+			map.on("styledata", function () {
+				map.resize();
+			});
+			map.on("load", e => {
+				for (let i = 0; i < 10; i++) {
+					let el = this.createDonutChart();
+					new mapboxgl.Marker({ element: el }).setLngLat([this.getRandomLng(), this.getRandomLat()]).addTo(map);
+				}
+			})
+
+
+		},
+		methods: {
+
+			getRandomLat() {
+				return Math.random() * 90
+			},
+			getRandomLng() {
+				return Math.random() * 180
+			},
+
+			// 生成随机数据
+			getData() {
+				return [Math.floor(Math.random() * 11), Math.floor(Math.random() * 11), Math.floor(Math.random() * 11)]
+			},
+			createDonutChart() {
+				//随机数据
+				let data = this.getData();
+				let total = data[0] + data[1] + data[2];
+				if (total === 0) { return }
+
+				//半径和直径
+				let w = 100;
+				let r = w / 2;
+				let fontSize = 14;
+				//角度计算
+				let degree1 = data[0] / total * 2 * Math.PI;
+				let degree2 = data[1] / total * 2 * Math.PI;
+				//计算大角小角
+				let largeArcFlag1 = degree1 > Math.PI ? 1 : 0;
+				let largeArcFlag2 = degree2 > Math.PI ? 1 : 0;
+				//计算终点位置
+				let endX1, endY1, endX2, endY2;
+				endX2 = r - r * Math.sin(degree2);
+				endX1 = r + r * Math.sin(degree1);
+				endY2 = r - r * Math.cos(degree2);
+				endY1 = r - r * Math.cos(degree1);
+				//拼接SVG
+				let html = '<svg width="' + w + '" height="' + w + '" viewbox="0 0 ' + w + ' ' + w +
+					'" text-anchor="middle" style="font: ' + fontSize + 'px sans-serif"><circle cx="' + r + '" cy="' + r + '" r="' + r +
+					'" fill="#FF0000" />';
+				let greenArea = `<path d="
+		  M${r} ${r}
+		  L${r} 0
+		  A${r} ${r} 0 ${largeArcFlag1} 1 ${endX1} ${endY1}
+	  " fill="#00FF00"/>`
+
+				let blueArea = `<path d="
+		  M${r} ${r}
+		  L${r} 0
+		  A${r} ${r} 0 ${largeArcFlag2} 0 ${endX2} ${endY2}
+	  " fill="#0000FF"/>`
+				html += blueArea;
+				html += greenArea;
+				html += "</svg>"
+
+				let el = document.createElement('div');
+				el.innerHTML = html;
+				return el.firstChild;
+			},
+
+
+		}
+	}
+</script>
+
+<style>
+	body,
+	html {
+		padding: 0;
+		margin: 0;
+	}
+
+	#map {
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+</html>

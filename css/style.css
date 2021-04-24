@@ -1,0 +1,866 @@
+﻿a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block
+}
+
+body {
+    line-height: 1
+}
+
+ol,
+ul {
+    list-style: none
+}
+
+blockquote,
+q {
+    quotes: none
+}
+
+blockquote:after,
+blockquote:before,
+q:after,
+q:before {
+    content: '';
+    content: none
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+body {
+    background: #f8f8f8;
+    font-family: "Microsoft YaHei", "Microsoft JhengHei", STHeiti, MingLiu;
+    text-align: center;
+    color: #fff
+}
+
+.login-container {
+    margin: 10% auto 0 auto
+}
+
+.register-container {
+    margin: 6% auto 0 auto
+}
+
+@media (min-width:670px) {
+    .login-container {
+        margin: 8% auto 0 auto;
+    }
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 700;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, .2)
+}
+
+form {
+    position: relative;
+    width: 305px;
+    margin: 15px auto 0 auto;
+    text-align: center
+}
+
+input {
+    width: 270px;
+    height: 42px;
+    line-height: 42px;
+    margin-top: 25px;
+    padding: 0 15px;
+    background: #2d2d2d;
+    background: rgba(45, 45, 45, .15);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d;
+    border: 1px solid rgba(255, 255, 255, .15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1) inset;
+    font-family: "Microsoft YaHei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s
+}
+
+input:-moz-placeholder {
+    color: #fff
+}
+
+input:-ms-input-placeholder {
+    color: #fff
+}
+
+input::-webkit-input-placeholder {
+    color: #fff
+}
+
+input:focus {
+    outline: 0;
+    -moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1) inset, 0 2px 7px 0 rgba(0, 0, 0, .2);
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1) inset, 0 2px 7px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1) inset, 0 2px 7px 0 rgba(0, 0, 0, .2)
+}
+
+button {
+    cursor: pointer;
+    width: 300px;
+    height: 44px;
+    margin-top: 25px;
+    padding: 0;
+    background: rgba(6, 127, 228, 0.71);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 0;
+    -moz-box-shadow: 0 15px 30px 0 rgba(255, 255, 255, .25) inset, 0 2px 7px 0 rgba(0, 0, 0, .2);
+    font-family: "Microsoft YaHei", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s
+}
+
+button:hover {
+    -moz-box-shadow: 0 15px 30px 0 rgba(255, 255, 255, .15) inset, 0 2px 7px 0 rgba(0, 0, 0, .2);
+    -webkit-box-shadow: 0 15px 30px 0 rgba(255, 255, 255, .15) inset, 0 2px 7px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 15px 30px 0 rgba(255, 255, 255, .15) inset, 0 2px 7px 0 rgba(0, 0, 0, .2)
+}
+
+button:active {
+    -moz-box-shadow: 0 15px 30px 0 rgba(255, 255, 255, .15) inset, 0 2px 7px 0 rgba(0, 0, 0, .2);
+    -webkit-box-shadow: 0 15px 30px 0 rgba(255, 255, 255, .15) inset, 0 2px 7px 0 rgba(0, 0, 0, .2);
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, .1) inset, 0 1px 4px 0 rgba(0, 0, 0, .1);
+    border: 0 solid #016FCB
+}
+
+.connect {
+    margin-top: 18px;
+    width: 100%;
+    font-size: 14px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+.connect p {
+    position: relative;
+    left: -140%;
+    top: 0;
+    margin-top: 20px
+}
+
+.connect a {
+    display: inline-block;
+    width: 32px;
+    height: 35px;
+    margin-top: 15px;
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s
+}
+
+.alert {
+    width: 310px;
+    height: 200px;
+    background: #000;
+    position: absolute;
+    top: -40%;
+    left: 50%;
+    margin: -101px 0 0 -151px
+}
+
+.alert h2 {
+    height: 40px;
+    padding-left: 8px;
+    font-size: 14px;
+    background: #FF0543;
+    text-align: left;
+    line-height: 40px
+}
+
+.alert .alert_con {
+    background: #fff;
+    height: 160px
+}
+
+.alert .alert_con p {
+    color: #000;
+    line-height: 90px
+}
+
+.alert .alert_con .btn {
+    padding: 3px 10px;
+    color: #fff;
+    cursor: pointer;
+    background: #72D1FF;
+    border: 1px solid #72D1FF;
+    border-radius: 4px
+}
+
+.alert .alert_con .btn:hover {
+    background: #4FB2EF;
+    border: 1px solid #4FB2EF;
+    border-radius: 4px
+}
+
+
+/* Supersized - Fullscreen Slideshow jQuery Plugin  Version : 3.2.7 */
+
+* {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    background: #111;
+    height: 100%
+}
+
+img {
+    border: none
+}
+
+#supersized-loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 0;
+    width: 60px;
+    height: 60px;
+    margin: -30px 0 0 -30px;
+    text-indent: -999em;
+}
+
+#supersized {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    z-index: -999;
+    height: 100%;
+    width: 100%
+}
+
+#supersized img {
+    width: auto;
+    height: auto;
+    position: relative;
+    display: none;
+    outline: 0;
+    border: none
+}
+
+#supersized.speed img {
+    -ms-interpolation-mode: nearest-neighbor;
+    image-rendering: -moz-crisp-edges
+}
+
+#supersized.quality img {
+    -ms-interpolation-mode: bicubic;
+    image-rendering: optimizeQuality
+}
+
+#supersized li {
+    display: block;
+    list-style: none;
+    z-index: -30;
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #111
+}
+
+#supersized a {
+    width: 100%;
+    height: 100%;
+    display: block
+}
+
+#supersized li.prevslide {
+    z-index: -20
+}
+
+#supersized li.activeslide {
+    z-index: -10
+}
+
+#supersized li.activeslide img,
+#supersized li.prevslide img {
+    display: inline
+}
+
+#supersized img {
+    max-width: none!important
+}
+
+.box-line {
+    height: 0;
+    overflow: hidden;
+    border-top: 1px #c2c2c2 solid;
+    margin-top: 20px;
+}
+
+.register-tis {
+    line-height: 42px;
+    margin: 15px auto 0px;
+    padding: 0 15px;
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    background: rgba(45, 45, 45, 0.33);
+    border-radius: 6px;
+}
+
+
+/*************************************************************************************/
+
+.travel {
+    line-height: 42px;
+    margin: 15px auto 0px;
+    padding: 0 15px;
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    background: rgba(45, 45, 45, 0.33);
+    border-radius: 6px;
+}
+
+label.error {
+    display: block;
+    -webkit-transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    border-radius: 0px 0px 5px 5px;
+    width: 300px;
+    height: 34px;
+    border: 1px solid rgba(255, 255, 255, .15);
+    line-height: 31px;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .1) inset;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+    background: rgba(245, 26, 26, 0.81);
+    -moz-border-radius: 6px;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+body {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    overflow: hidden;
+}
+
+/*正文头部样式*/
+div#Header {
+    height: 15px;
+    z-index: 2000;
+}
+
+#title {
+    font-size: 22px;
+    font-family: Times New Roman;
+    color: rgb(10,36,106); /*rgb(10,36,106)*/
+    font-weight: bold;
+    display: block;
+}
+
+#shortdesc {
+    font-family: Microsoft YaHei;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0px 0px 0px 20px;
+    color: #333;
+    position: absolute;
+    top: 35px;
+}
+
+/*表格中地图样式*/
+#map, .olMap {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+}
+
+#mapCon {
+    width: 100%;
+    height: 90%;
+    position: absolute;
+}
+
+#toolbar {
+    position: absolute;
+    height: 200px;
+    width: 50px;
+    right: 4px;
+    bottom: 100px;
+    z-index: 1000;
+}
+
+    #toolbar ul {
+        width: 100%;
+        margin: 5px 5px 5px 0;
+        padding: 0;
+        margin: 0;
+        height: 50px;
+        list-style: none;
+    }
+
+        #toolbar ul li {
+            margin: 5px 5px 5px 5px;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+.operator {
+    width: 50px;
+    height: 50px;
+    background-image: url("../Libs/images/operator.png");
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.opZoomIn {
+    background-position: 0px -50px;
+}
+
+.opZoomOut {
+    background-position: -50px -50px;
+}
+
+.opPan {
+    background-position: -150px -50px;
+}
+
+.opRestore {
+    background-position: -100px -50px;
+}
+
+.featureBtn {
+    position: absolute;
+    height: 150px;
+    top: 30px;
+    width: 100px;
+    z-index: 1003;
+    right: 30px;
+    border: medium double #F0A4F5;
+    background: #EEEFF5 none repeat scroll 0% 0%;
+    opacity: 1;
+    padding: 5px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -o-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.functionButton {
+    width: 86px;
+    height: 40px;
+    border: 0px none;
+    margin: 5px;
+    font-size: 12px;
+    font-family: Microsoft YaHei;
+    background: #CED2EF none repeat scroll 0% 0%;
+    box-shadow: 0px 0px 5px #888;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.pntQueryBtn {
+    background-image: url(../images/win8/pntQuery.png);
+}
+
+.linQueryBtn {
+    background-image: url(../images/win8/linQuery.png);
+}
+
+.rectQueryBtn {
+    background-image: url(../images/win8/rectQuery.png);
+}
+
+.cirQueryBtn {
+    background-image: url(../images/win8/cirQuery.png);
+}
+
+.polyQueryBtn {
+    background-image: url(../images/win8/polyQuery.png);
+}
+
+.attQueryBtn {
+    background-image: url(../images/win8/attQuery.png);
+}
+
+.addbutton {
+    background-image: url(../images/win8/addpnt.png);
+}
+
+.updatebutton {
+    background-image: url(../images/win8/uppnt.png);
+}
+
+.deletebutton {
+    background-image: url(../images/win8/depnt.png);
+}
+
+.stopbutton {
+    background-image: url(../images/win8/stopnedit.png);
+}
+
+.functionButtonLib {
+    background: #A5ACE7 none repeat scroll 0% 0%;
+    font-size: 12px;
+    font-family: Microsoft YaHei;
+    box-shadow: 0px 0px 5px #888;
+    margin: 13px;
+    padding: 1px;
+}
+
+.functionButton {
+    width: 65px;
+    height: 65px;
+    border: 0px none;
+    margin: 5px;
+    font-size: 12px;
+    font-family: Microsoft YaHei;
+    font-weight: bold;
+    background-color: White;
+}
+
+.FeatureText {
+    box-shadow: 0px 0px 5px #888;
+    width: 55px;
+}
+
+.layerItem {
+    width: 100px;
+    height: 25px;
+    box-shadow: 0px 0px 5px #888;
+}
+
+.featrueBtn {
+    position: absolute;
+    top: 76%;
+    z-index: 1003;
+    left: 8%;
+    border: medium double #F0A4F5;
+    background: #EEEFF5 none repeat scroll 0% 0%;
+    opacity: 0.9;
+    padding: 5px;
+}
+
+
+.CheckRadio {
+    float: left;
+    margin-left: 10px;
+    margin-top: 2px;
+}
+
+.CheckBox_text {
+    display: block;
+    float: left;
+    margin-left: 5px;
+}
+
+.checkBoxList {
+    margin: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    width: 430px;
+}
+
+
+.resInfoText {
+    height: 350px;
+    width: 270px;
+}
+
+.resultDrawDiv {
+    box-shadow: 0px 0px 5px #888;
+    height: 40px;
+    padding: 5px;
+}
+
+.imagelabel {
+    background: url(../images/bizinfo/labsleft.png) left top no-repeat;
+    height: 30px;
+    width: 50px;
+    display: inline-block;
+    display: -moz-inline-stack;
+    padding-left: 1px;
+    vertical-align: middle;
+    font-size: 12px;
+    white-space: nowrap;
+    position: absolute;
+    left: -33px;
+    top: -27px;
+}
+
+.imagelabelRight {
+    background: url(../images/bizinfo/labsright.png) right top no-repeat;
+    float: left;
+    height: 30px;
+    display: inline-block;
+    display: -moz-inline-stack;
+    padding-left: 1px;
+    vertical-align: middle;
+    font-size: 12px;
+    white-space: nowrap;
+    position: absolute;
+    left: 4px;
+    top: -27px;
+}
+
+.imagelabel .spanid {
+    background: url(../images/bizinfo/labsright.png) right top no-repeat;
+    height: 20px;
+    line-height: 20px;
+    padding-right: 8px;
+    padding-top: 0px;
+    cursor: pointer;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.imagelabelRight .spanid {
+    height: 20px;
+    line-height: 20px;
+    padding-right: 8px;
+    padding-top: 0px;
+    cursor: pointer;
+    display: -moz-inline-stack;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: -20px;
+}
+
+    .imagelabelRight .spanid .spana {
+        white-space: nowrap;
+        color: white;
+        font-weight: bold;
+    }
+
+.markerTransparent {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    font-size: 12px;
+    left: 14px;
+}
+
+.ButtonLib {
+    color: #1ab394;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-color: #1ab394;
+    border-radius: 3px;
+    background-image: none;
+    background-color: transparent;
+}
+
+    .ButtonLib:hover {
+        color: white;
+        background-color: #1ab394;
+    }
+
+.ToolLib {
+    border-radius: 3px;
+    height: auto;
+    box-shadow: 0 0 2px 1px #949292;
+    text-align: center;
+    z-index: 2001;
+    border-color: #66ccff;
+    border-bottom: 1px solid #949292;
+    margin-bottom: 2px;
+}
+/*结果显示面板*/
+#resultT {
+    position: absolute;
+    overflow: auto;
+    font-size: 12pt;
+    font-weight: bold;
+    color: #F00;
+    padding: 10px;
+    font-family: 微软雅黑;
+    color: #008000;
+}
+
+#introduction {
+    position: absolute;
+    overflow: auto;
+    font-size: 10pt;
+    margin: 10px 10px 10px 10px;
+    padding: 10px;
+    font-family: 微软雅黑;
+    color: #008000;
+}
+/*Fushioncharts统计图*/
+#divPieChart2 {
+    margin: 100px auto;
+    text-align: center;
+}
+
+/*图层投影转换*/
+#allmap {
+    width: 100%;
+    height: 95%;
+    position: absolute;
+}
+
+#orgMap {
+    width: 48%;
+    height: 95%;
+    float: left;
+    position: relative;
+    border: 1px solid black;
+}
+
+#prjMap {
+    width: 48%;
+    height: 95%;
+    float: right;
+    margin-left: 5px;
+    position: relative;
+    border: 1px solid black;
+}
+/*缓冲条样式*/
+#preview {
+    position: absolute;
+    background: rgba(3,3,3,0.1);
+    color: #fff;
+    float: left;
+    width: 100%;
+    height: 100%;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    z-index: 20000;
+}
